@@ -1,0 +1,125 @@
+/* pages/chat/index.wxss */
+.bgc {
+  background-color: #E1E0E5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+/* *****************消息区域***************** */
+.chat-container {
+  padding-bottom: 110rpx;
+  height: 100vh;
+  box-sizing: border-box;
+}
+.chat-item{
+  display: flex;
+  padding: 20rpx 0;
+}
+.avatar{
+  width: 80rpx;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;  
+}
+.avatar image {
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+}
+.msg-box{
+  padding: 0 10rpx;
+}
+.content-box{
+  background-color: #fff;
+  padding: 15rpx 20rpx;
+  border-radius: 5rpx;
+  margin-top: 10rpx;
+  position: relative;
+  max-width: 400rpx;
+}
+.content-box::before {
+  content: " ";
+  background-color: white;
+  height: 25rpx;
+  width: 25rpx;
+  position: absolute;
+  left: -8rpx;
+  top: 22rpx;
+  transform: rotate(45deg);
+}
+ 
+.img-content image {
+  max-width: 400rpx;
+  border-radius: 10rpx;
+}
+/* *****************消息区域***************** */
+ 
+/* *****************发送消息区域***************** */
+.send-msg-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  background-color: #F7F7F7;
+  /* background-color: hotpink; */
+  height: 110rpx;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+}
+.input {
+  background-color: #FFFFFF;
+  flex-grow: 1;
+  margin: 0 10rpx;
+  height: 68rpx;
+  border-radius: 10rpx;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
+.action-box{
+  display: flex;
+  width: 200rpx;
+  flex-shrink: 0;
+}
+.action-box .icon {
+  font-size: 55rpx;
+  color: #282828;
+}
+.action-box .send-btn .van-button {
+  height: 60rpx;
+  margin-left: 14rpx;
+}
+/* *****************发送消息区域***************** */
+ 
+/* *****************我发送的消息***************** */
+.my-msg {
+  flex-direction: row-reverse;
+}
+.my-msg .content-box::before {
+  left: auto;
+  right: -8rpx;
+}
+/* *****************我发送的消息***************** */
+.round-click{
+  height: 120rpx;
+  width: 120rpx;
+  background-color: #d92a2a;
+  border-radius: 100%;
+  position: fixed;
+  bottom: 150rpx;
+  right: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9;
+}
+.round-click navigator{
+  font-size: 32rpx;
+  max-width: 80rpx;
+  color: #fff;
+  text-align: center;
+}

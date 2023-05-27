@@ -1,0 +1,8 @@
+<!--pages/genpic/genpic.wxml-->
+
+<scroll-view class="chat-container" scroll-y >
+  <image style="width: 100%; margin:0px;" mode="widthFix" src="{{imageUrl}}"></image>
+</scroll-view>
+<view class="send-msg-container">
+    <input class="input" placeholder="请输入图片描述" bindconfirm="sendMsg" type="text" model:value="{{value}}" />
+</view>

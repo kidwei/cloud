@@ -1,0 +1,24 @@
+<view class="bgc"></view>
+<scroll-view class="chat-container" scroll-y scroll-into-view="{{'k'+list[list.length-1].id}}">
+  <view class="chat-item {{item.user == 1 ? 'my-msg' : ''}}" wx:for="{{list}}" id="{{'k'+item.id}}">
+    <view class="avatar">
+      <image src="{{item.icon}}">
+      </image>
+    </view>
+    <view class="msg-box">
+      <view class="nickname" wx:if="{{userName !== item.from}}">
+        {{item.nickName}}
+      </view>
+      <view class="content-box">
+        {{item.content}}
+      </view>
+    </view>
+  </view>
+</scroll-view>
+ 
+<view class="send-msg-container">
+    <input class="input" placeholder="请输入你的问题" bindconfirm="sendMsg" type="text" model:value="{{value}}" />
+</view>
+<view class="round-click">
+       <navigator url='/pages/genpic/genpic' >智能图片</navigator > 
+    </view>

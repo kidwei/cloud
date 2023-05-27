@@ -1,0 +1,30 @@
+
+.chat-container {
+  padding-bottom: 110rpx;
+  height: 100vh;
+  background-color: #E1E0E5;
+  box-sizing: border-box;
+}
+/* *****************发送消息区域***************** */
+.send-msg-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  background-color: #F7F7F7;
+  /* background-color: hotpink; */
+  height: 110rpx;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 10rpx;
+}
+.input {
+  background-color: #FFFFFF;
+  flex-grow: 1;
+  margin: 0 10rpx;
+  height: 68rpx;
+  border-radius: 10rpx;
+  padding: 0 15rpx;
+  box-sizing: border-box;
+}
