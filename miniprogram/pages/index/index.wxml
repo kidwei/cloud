@@ -9,8 +9,8 @@
       <view class="nickname" wx:if="{{userName !== item.from}}">
         {{item.nickName}}
       </view>
-      <view class="content-box">
-        {{item.content}}
+      <view id="{{'text'+item.id}}" class="content-box" bindlongpress="onLongPress">
+          {{item.content}}
       </view>
     </view>
   </view>

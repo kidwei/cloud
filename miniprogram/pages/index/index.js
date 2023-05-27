@@ -15,8 +15,11 @@ Page({
   },
   onLoad(options) {
     this.setData({
-      envId: options.envId
+      envId: options.envId,
+      list:getApp().list,
+      value:""
     });
+    getApp().id = getApp().list.length;
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -86,6 +89,68 @@ Page({
         showUploadTip: true
       });
       wx.hideLoading();
+    });
+  },
+  onLongPress(e){
+    var thiz = this;
+    wx.showActionSheet({
+      itemList: ['复制文本', '播放语音'],
+      success(res) {
+        var id = parseInt(e.target.id.substring(4))
+        var content = getApp().list[id].content;
+        if (res.tapIndex == 0) {
+          wx.setClipboardData({
+            data: content,
+            success(res) {
+              wx.showToast({
+                title: '复制成功',
+                icon: 'success'
+              })
+            }
+          });
+        }
+        else if (res.tapIndex == 1) {
+          wx.showLoading({
+            title: '生成语音中...',
+          })
+          console.log(content)
+          var url = `https://kidwei.eu.org:5601/tts?text=${content}&voice='晓伊'`
+          let innerAudioContext = wx.createInnerAudioContext();
+          thiz.setData({
+            innerAudioContext: innerAudioContext
+          });
+          innerAudioContext.src = encodeURI(url);
+          innerAudioContext.play();
+          innerAudioContext.onError((e) => {
+            console.log(e);
+            wx.hideLoading();
+          });
+          innerAudioContext.onPlay(() => {
+            wx.hideLoading();
+          });
+
+          // var thiz = this
+          // wx.cloud.callFunction({
+          //   name: 'minicloudFunctions',
+          //   config: {
+          //     env: this.data.envId
+          //   },
+          //   data: {
+          //     type: 'playTextSound',
+          //     message:content,
+          //     type: '晓伊'
+          //   }
+          // }).then((resp) => {
+          //   wx.hideLoading()
+          //   thiz.setData({
+          //     imageUrl:resp.result.response
+          //   })
+          // }).catch((e) => {
+          //   console.log(e);
+          //   wx.hideLoading();
+          // });
+        }
+      }
     });
   }
 })

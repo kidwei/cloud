@@ -1,6 +1,7 @@
 const getSoundList = require('./getSoundList/index');
 const getChatMessage = require('./getChatMessage/index');
 const getChatImage = require('./getChatImage/index');
+const playTextSound = require('./playTextSound/index');
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -11,5 +12,7 @@ exports.main = async (event, context) => {
       return await getChatMessage.main(event, context);
     case 'getChatImage':
       return await getChatImage.main(event, context);
+    case 'playTextSound':
+      return await playTextSound.main(event, context);
   }
 };
