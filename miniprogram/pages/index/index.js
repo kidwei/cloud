@@ -13,6 +13,14 @@ Page({
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
   },
+  onShareAppMessage({from,target}){
+    console.log(from,target);
+    let myObj = {
+      title:`小小云端个人助手`,
+      path:"/pages/index/index"
+    }
+    return myObj;
+  },
   onLoad(options) {
     this.setData({
       envId: options.envId,
@@ -20,6 +28,22 @@ Page({
       value:""
     });
     getApp().id = getApp().list.length;
+
+    wx.cloud.callFunction({
+      name: 'minicloudFunctions',
+      config: {
+        env: this.data.envId
+      },
+      data: {
+        type: 'getSoundList'
+      }
+    }).then((resp) => {
+      thiz.sounds = JSON.parse(resp.result.response)
+      thiz.sounds.sort(function(){
+          return 0.5 - Math.random();
+      })
+    }).catch((e) => {
+    });
   },
   getUserProfile(e) {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
@@ -114,8 +138,22 @@ Page({
             title: '生成语音中...',
           })
           console.log(content)
-          var url = `https://kidwei.eu.org:5601/tts?text=${content}&voice='晓伊'`
+          var voice = '晓伊';
+          if(thiz.sounds){
+            voice = thiz.sounds[0]
+          }
+          var url = `https://kidwei.eu.org:5601/tts?text=${content}&voice=${voice}`
           let innerAudioContext = wx.createInnerAudioContext();
+          // 解决IOS无法播放音频问题
+          var music = wx.setInnerAudioOption({
+            obeyMuteSwitch: false,
+            success: function (res) {
+            console.log("开启静音模式下播放音乐的功能");
+            },
+            fail: function (err) {
+            console.log("静音设置失败");
+            },
+          });
           thiz.setData({
             innerAudioContext: innerAudioContext
           });
